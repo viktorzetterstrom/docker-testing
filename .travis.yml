@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true vikzet/docker-kubernetes-testing yarn test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "docker-test"
+  env: "DockerTest-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-302963688785"
+  bucket_path: "docker-test"
+  on:
+    branch: master
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key: $SECRET_ACCESS_KEY
